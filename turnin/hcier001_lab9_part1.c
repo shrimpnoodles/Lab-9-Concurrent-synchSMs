@@ -13,7 +13,7 @@
 #include "timer.h"
 #endif
 
-enum ThreeLEDsSM {start, init, one, two} state;
+enum ThreeLEDsSM {start, init, one, two, three} state;
 unsigned char threeLEDS;
 
 ThreeLEDsSM_Tick(){
@@ -28,6 +28,9 @@ ThreeLEDsSM_Tick(){
 			state = two;
 			break;
 		case two:
+			state = three;
+			break;
+		case three:
 			state = one;
 			break;
 		default:
@@ -45,6 +48,9 @@ ThreeLEDsSM_Tick(){
 			break;
 		case two:
 			threeLEDS = 0x02;
+			break;
+		case three:
+			threeLEDS = 0x04;
 			break;
 		default:
 			break;
@@ -78,7 +84,7 @@ BlinkingLEDSM_Tick(){
 			blinkingLED = 0x00;
 			break;
 		case 3on:
-			blinkningLED = 0x04;
+			blinkningLED = 0x08;
 			break;
 		case 3off:
 			blinkingLED = 0x00;
