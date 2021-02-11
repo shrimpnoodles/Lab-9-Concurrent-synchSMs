@@ -16,7 +16,7 @@
 enum ThreeLEDsSM {start, init, one, two, three} state;
 unsigned char threeLEDS;
 
-ThreeLEDsSM_Tick(){
+void ThreeLEDsSM_Tick(){
 	switch(state) { 
 		case start:
 			state = init;
@@ -34,7 +34,7 @@ ThreeLEDsSM_Tick(){
 			state = one;
 			break;
 		default:
-			case = start;
+			state = start;
 			break;
 		}
 	switch(state){
@@ -57,36 +57,36 @@ ThreeLEDsSM_Tick(){
 		}
 }
 
-enum BlinkingLEDSM {startBL, init_BL, 3on, 3off} state_BL;
+enum BlinkingLEDSM {startBL, init_BL, fouron, fouroff} state_BL;
 unsigned char blinkingLED;
-BlinkingLEDSM_Tick(){
+void BlinkingLEDSM_Tick(){
 	switch(state_BL){
 		case startBL:
 			state_BL = init_BL;
 			break;
 		case init_BL:
-			state_BL= 3on;
+			state_BL= fouron;
 			break;
-		case 3on:
-			state_BL = 3off;
+		case fouron:
+			state_BL = fouroff;
 			break;
-		case 3off:
-			state_BL = 3on;
+		case fouroff:
+			state_BL = fouron;
 			break;
 		default:
-			case = start_BL;
+			state_BL = startBL;
 			break;
 		}
 	switch(state_BL){ //actions
-		case start_BL:
+		case startBL:
 			break;
 		case init_BL:
 			blinkingLED = 0x00;
 			break;
-		case 3on:
-			blinkningLED = 0x08;
+		case fouron:
+			blinkingLED = 0x08;
 			break;
-		case 3off:
+		case fouroff:
 			blinkingLED = 0x00;
 			break;
 		default:
@@ -96,7 +96,7 @@ BlinkingLEDSM_Tick(){
 
 enum CombineLEDsSM { start_com, out_com} state_com;
 
-CombineLEDsSM_Tick(){
+void CombineLEDsSM_Tick(){
 	switch( state_com){
 	case start_com:
 		state_com = out_com;
@@ -111,7 +111,7 @@ CombineLEDsSM_Tick(){
 		case start_com:
 			break;
 		case out_com:
-			PORTB = blinkingLED | threeLEDs;
+			PORTB = blinkingLED | threeLEDS;
 			break;
 		}
 }
